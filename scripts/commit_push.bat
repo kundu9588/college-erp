@@ -15,6 +15,7 @@ echo.
 
 REM Add all changes
 git add .
+git status
 if errorlevel 1 (
     echo ❌ Failed to add changes
     exit /b 1

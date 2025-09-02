@@ -12,7 +12,7 @@ Let's set up your entire development environment step by step. I'll guide you th
 ```bash
 node --version
 npm --version
-```
+``` 
 
 ### **Install Git**
 1. Download Git from [git-scm.com](https://git-scm.com/download/win)

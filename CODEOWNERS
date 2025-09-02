@@ -1,0 +1,15 @@
+# Global owners
+* @YOUR-USERNAME
+
+# Backend code
+/backend/ @backend-team-lead
+/backend/auth/ @auth-developer
+/backend/student/ @student-module-dev
+
+# Frontend code  
+/frontend/ @frontend-team-lead
+/frontend/src/components/ @ui-developer
+
+# Documentation
+/docs/ @tech-writer
+README.md @YOUR-USERNAME

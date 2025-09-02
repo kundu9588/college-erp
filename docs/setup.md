@@ -3,7 +3,7 @@
 Let's set up your entire development environment step by step. I'll guide you through installing everything you need to start building your college ERP system.
 
 ## **Step 1: Install Core Development Tools**
-
+ 
 ### **Install Node.js**
 1. Go to [nodejs.org](https://nodejs.org/) and download the **LTS version** (recommended for most users)
 2. Run the installer and follow the setup wizard

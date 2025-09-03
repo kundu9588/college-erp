@@ -1,3 +1,4 @@
+@REM sync_main.bat
 @echo off
 
 echo 🔄 Syncing with main branch...

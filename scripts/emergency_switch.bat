@@ -1,5 +1,5 @@
 @echo off
-
+@REM emergency_switch.bat
 if "%1"=="" (
     echo Usage: emergency_switch.bat branch-name
     echo This will stash current work and switch to specified branch

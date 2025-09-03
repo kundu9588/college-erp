@@ -1,3 +1,4 @@
+@REM cleanup_branches.bat
 @echo off
 
 echo 🧹 Cleaning up merged branches...

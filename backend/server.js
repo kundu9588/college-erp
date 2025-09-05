@@ -15,7 +15,9 @@ app.use(express.json({ limit: "10mb" }));
 app.use(express.urlencoded({ extended: true }));
 const authRoutes = require('./routes/authRoutes');
 // Routes
+
 app.use("/api/auth",authRoutes);
+
 
 // Error handling middleware
 app.use((err, req, res, next) => {

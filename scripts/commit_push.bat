@@ -1,3 +1,4 @@
+@REM commit_push.bat
 @echo off
 
 REM Check if commit message is provided

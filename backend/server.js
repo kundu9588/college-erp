@@ -13,11 +13,11 @@ app.use(cors());
 app.use(morgan("combined"));
 app.use(express.json({ limit: "10mb" }));
 app.use(express.urlencoded({ extended: true }));
-
+const authRoutes = require('./routes/authRoutes');
 // Routes
-app.get("/api/health", (req, res) => {
-  res.json({ status: "OK", message: "College ERP API is running" });
-});
+
+app.use("/api/auth",authRoutes);
+
 
 // Error handling middleware
 app.use((err, req, res, next) => {

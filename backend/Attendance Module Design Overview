@@ -1,0 +1,23 @@
+Core Concepts
+Multi-tenant: Attendance records linked to institution_id.
+
+Scoped by Group: Attendance taken per group (class, department, or team).
+
+Flexible Roles: Only users with take_attendance permission can mark attendance.
+
+Time Periods: Attendance can be for specific dates, sessions, or time ranges.
+
+User Types: Attendance can apply to different user categories (students, employees).
+
+Extensible Properties: Supports statuses like Present, Absent, Late, Excused, etc.
+
+
+
+Summary of Backend Flow
+Step	Table(s) Involved	Key Logic
+Institution Register	institutions	Create institution & seed roles
+User Creation	users, user_roles	Create users, assign dynamic roles
+Groups Setup	groups, user_groups	Create classes, assign users to groups
+Create Attendance Session	attendance_sessions	Teacher creates session for group
+Mark Attendance	attendance_records	Teacher marks attendance per user
+View Attendance	attendance_records, users	View records by authorized users

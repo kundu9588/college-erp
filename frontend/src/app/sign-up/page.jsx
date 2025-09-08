@@ -1,4 +1,4 @@
-import SignInLayer from '../../Componets/SignInLayer'
+import SignUpLayer from '../../Componets/SignUpLayer';
 
 export const metadata = {
   title: "WowDash NEXT JS - Admin Dashboard Multipurpose Bootstrap 5 Template",
@@ -9,8 +9,8 @@ export const metadata = {
 const Page = () => {
   return (
     <>
-      {/* SignInLayer */}
-      <SignInLayer />
+      {/* SignUpLayer */}
+      <SignUpLayer />
     </>
   );
 };

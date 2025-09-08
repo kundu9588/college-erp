@@ -4,8 +4,6 @@ import { Icon } from "@iconify/react";
 import { usePathname } from "next/navigation";
 import ThemeToggleButton from "../helper/ThemeToggleButton";
 import Link from "next/link";
-import { Provider } from 'react-redux';
-import { wrapper } from '../store';
 const MasterLayout = ({ children }) => {
   let pathname = usePathname();
   let [sidebarActive, seSidebarActive] = useState(false);
@@ -92,7 +90,6 @@ const MasterLayout = ({ children }) => {
   };
 
   return (
-     <Provider store={store}>
     <section className={mobileMenu ? "overlay active" : "overlay "}>
       {/* sidebar */}
       <aside
@@ -1859,7 +1856,6 @@ const MasterLayout = ({ children }) => {
         </footer>
       </main>
     </section>
-    </Provider>
   );
 };
 

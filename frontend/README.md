@@ -70,3 +70,48 @@ You can check out [the Next.js GitHub repository](https://github.com/vercel/next
 The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
 
 Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+
+project-root/
+├── src/
+│   ├── components/                # Reusable UI components
+│   │   ├── auth/                 # Authentication-related components
+│   │   │   ├── SignInLayer.tsx   # Sign-in component
+│   │   ├── common/               # Shared components (e.g., buttons, modals)
+│   │   ├── layout/               # Layout components (e.g., sidebar, header)
+│   ├── features/                 # Redux Toolkit slices for each module
+│   │   ├── auth/                 # Authentication module
+│   │   │   ├── actions.ts
+│   │   │   ├── apiClient.ts
+│   │   │   ├── clients.ts
+│   │   │   ├── model.ts         # Contains User interface
+│   │   │   ├── reducer.ts
+│   │   │   ├── selectors.ts
+│   │   │   ├── services.ts
+│   │   ├── inventory/            # Inventory module
+│   │   │   ├── actions.ts
+│   │   │   ├── model.ts         # Contains InventoryItem interface
+│   │   │   ├── reducer.ts
+│   │   │   ├── selectors.ts
+│   │   │   ├── services.ts
+│   │   ├── employees/            # Employee module
+│   │   ├── finance/             # Finance module
+│   ├── pages/                    # Next.js pages
+│   │   ├── _app.tsx             # Custom App for Redux setup
+│   │   ├── _document.tsx        # Custom Document
+│   │   ├── index.tsx            # Home page
+│   │   ├── login.tsx            # Login page
+│   │   ├── dashboard.tsx        # Dashboard page
+│   │   ├── inventory/           # Inventory-related pages
+│   │   ├── employees/           # Employee-related pages
+│   │   ├── finance/             # Finance-related pages
+│   ├── store/                    # Redux store configuration
+│   │   ├── rootReducer.ts
+│   │   ├── store.ts
+│   │   ├── storeTypes.ts        # Redux store types (RootState, AppDispatch)
+│   ├── styles/                   # CSS/SCSS files
+│   ├── utils/                    # Utility functions (e.g., API helpers)
+│   ├── public/                   # Static assets (images, etc.)
+├── .env.local                    # Environment variables
+├── next.config.js                # Next.js configuration
+├── tsconfig.json                 # TypeScript configuration
+├── package.json

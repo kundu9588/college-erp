@@ -32,22 +32,19 @@ const SignInLayer = () => {
   // Redirect after authentication
   useEffect(() => {
     if (isAuthenticated) {
-      router.push('/dashboard');
+      router.push('/SuperAdmin/Dashboard');
     }
   }, [isAuthenticated, router]);
 
   const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
     try {
-      // Thunk returns { user, accessToken, refreshToken }
       const result = await dispatch(
         loginUserAsync({ email, password, rememberMe })
       ).unwrap();
-
-      // If you need user info immediately:
-      console.log('Logged in user (not saved in Redux):', result.user);
+      console.log('Logged in user:', result.user); // if you need it right away
     } catch {
-      // Error is already handled in Redux state
+      // Error already in Redux state
     }
   };
 
@@ -70,7 +67,7 @@ const SignInLayer = () => {
           </p>
 
           <form onSubmit={handleSubmit}>
-            {/* Email field */}
+            {/* Email */}
             <div className="icon-field mb-16">
               <span className="icon top-50 translate-middle-y">
                 <Icon icon="mage:email" />
@@ -85,7 +82,7 @@ const SignInLayer = () => {
               />
             </div>
 
-            {/* Password field */}
+            {/* Password */}
             <div className="position-relative mb-20">
               <div className="icon-field">
                 <span className="icon top-50 translate-middle-y">
@@ -109,17 +106,20 @@ const SignInLayer = () => {
               />
             </div>
 
-            {/* Error message */}
+            {/* Error block */}
             {error && (
               <div className="alert alert-danger mb-16">
-                {error.message}
-                {error.code && ` (Code: ${error.code})`}
-                {error.status && ` [Status: ${error.status}]`}
+                <strong>{error.message}</strong>
+                {error.code && <div>Code: {error.code}</div>}
+                {error.status && <div>Status: {error.status}</div>}
+                {/* If your ApiError contains details */}
+                {(error as any).details && (
+                  <div>Details: {(error as any).details}</div>
+                )}
               </div>
             )}
 
             <div className="d-flex justify-content-between gap-2 mb-12">
-              {/* Remember me */}
               <div className="form-check style-check d-flex align-items-center">
                 <input
                   className="form-check-input border border-neutral-300"
@@ -132,8 +132,10 @@ const SignInLayer = () => {
                   Remember me
                 </label>
               </div>
-
-              <Link href="/forgot-password" className="text-primary-600 fw-medium">
+              <Link
+                href="/forgot-password"
+                className="text-primary-600 fw-medium"
+              >
                 Forgot Password?
               </Link>
             </div>

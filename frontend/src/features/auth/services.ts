@@ -1,62 +1,38 @@
+// services.ts
 import { createAsyncThunk } from '@reduxjs/toolkit';
-import { User, ApiError } from './model';
-import { setLoading, setTokens, setError, clearError } from './actions';
+import { User, ApiError, ApiResponse } from './model';
+import { setLoading, setTokens, setError, clearError, resetAuth } from './actions';
 import { RootState } from '../../store/store';
 import { authClient } from '../../utils/apiClient';
 
-interface LoginResponse {
-  success: boolean;
-  message: string;
-  data: {
-    accessToken: string;
-    refreshToken: string;
-    roles: string[];
-    userId?: string;
-    institutionId?: string;
-    email?: string;
-    name?: string;
-  };
-  error: any;
+interface LoginData {
+  accessToken: string;
+  refreshToken: string;
+  roles: string[];
+  userId?: string;
+  institutionId?: string;
+  email?: string;
+  name?: string;
 }
 
-// Return the user but store only tokens in Redux
+// 🔹 Real login API
 export const loginUserAsync = createAsyncThunk<
   { user: User; accessToken: string; refreshToken: string },
   { email: string; password: string; rememberMe: boolean },
   { rejectValue: ApiError; state: RootState }
 >(
   'auth/loginUserAsync',
-  async ({ email, password, rememberMe }, { dispatch, rejectWithValue }) => {
+  async ({ email, password }, { dispatch, rejectWithValue }) => {
     dispatch(setLoading(true));
-
     try {
-      // 🔹 DEMO LOGIN (local check)
-      if (email === 'uditdhiman91@gmail.com' && password === '11111') {
-        const demoUser: User = {
-          userId: 'demo-user-1',
-          institutionId: 'demo-institution-123',
-          email,
-          name: 'Demo User',
-          roles: ['admin'],
-        };
+      // Call backend login
+      const { data: res } = await authClient.post<ApiResponse<LoginData>>(
+        '/auth/login',
+        { email, password }
+      );
 
-        const accessToken = 'demo-access-token';
-        const refreshToken = 'demo-refresh-token';
-
-        dispatch(clearError());
-        dispatch(setTokens({ accessToken, refreshToken }));
-
-        return { user: demoUser, accessToken, refreshToken };
-      }
-
-      // 🔹 REAL API CALL (fallback)
-      const { data: res } = await authClient.post<LoginResponse>('/auth/login', {
-        email,
-        password,
-      });
-
-      if (!res.success) {
-        throw new Error(res.error?.message || 'Login failed');
+      if (!res.success || !res.data) {
+        throw new Error(res.error?.details || res.message || 'Login failed');
       }
 
       const {
@@ -74,7 +50,7 @@ export const loginUserAsync = createAsyncThunk<
         institutionId,
         email: userEmail,
         name,
-        roles,
+        roles: roles ?? [],
       };
 
       dispatch(clearError());
@@ -83,13 +59,21 @@ export const loginUserAsync = createAsyncThunk<
       return { user: normalizedUser, accessToken, refreshToken };
     } catch (error: any) {
       const apiError: ApiError = {
-        message:
-          error.response?.data?.message || error.message || 'Login failed',
+        message: error.response?.data?.message || error.message || 'Login failed',
         status: error.response?.status ?? 400,
         code: error.response?.data?.code || 'UNKNOWN_ERROR',
       };
       dispatch(setError(apiError));
       return rejectWithValue(apiError);
     }
+  }
+);
+
+// 🔹 Logout thunk if needed
+export const logoutUserAsync = createAsyncThunk(
+  'auth/logoutUserAsync',
+  async (_, { dispatch }) => {
+    dispatch(resetAuth());
+    // optional backend logout here
   }
 );

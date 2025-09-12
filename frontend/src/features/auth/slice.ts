@@ -1,3 +1,4 @@
+// index.ts
 import authReducer from './reducers';
 
 export const reducer = authReducer;

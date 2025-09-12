@@ -1,4 +1,4 @@
-'use client';
+'use client'; // <-- Add this at the very top
 
 import React, { useEffect, useState } from 'react';
 import { useSelector } from 'react-redux';

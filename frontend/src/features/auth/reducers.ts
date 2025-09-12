@@ -1,3 +1,4 @@
+// reducers.ts
 import { createReducer } from '@reduxjs/toolkit';
 import { ApiError } from './model';
 import { setLoading, setTokens, setError, clearError, resetAuth } from './actions';
